@@ -26,8 +26,9 @@ public:
         int maxi = 0;
         solve(root, root->val, maxi);
         
-        maxi = max({maxi, maxAncestorDiff(root->left), maxAncestorDiff(root->right)});
+        int x = max(maxAncestorDiff(root->left), maxAncestorDiff(root->right));
         
+        maxi = max(maxi, x);
         return maxi;
     }
 };
