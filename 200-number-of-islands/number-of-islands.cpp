@@ -8,11 +8,15 @@ public:
         //jahaan khade ho use check karo na ki possible next steps ko
 
         grid[i][j] = '0';
+
+        //instead of calling dfs function 4 times , we can create direction arrays and use a loop
+
+        int dx[4] = {1, -1, 0, 0};
+        int dy[4] = {0, 0, 1, -1};
         
-        dfs(grid, i+1, j);
-        dfs(grid, i-1, j);
-        dfs(grid, i, j+1);
-        dfs(grid, i, j-1);
+        for(int k=0; k<4; k++){
+            dfs(grid, i+dx[k], j+dy[k]);
+        }
 
     }
     int numIslands(vector<vector<char>>& grid) {
