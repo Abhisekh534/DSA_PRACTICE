@@ -5,6 +5,8 @@ public:
         if(i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size()) return;
         if(visited[i][j] || grid[i][j]=='0') return;
         
+        //jahaan khade ho use check karo na ki possible next steps ko
+        
         visited[i][j] = true;
         
         dfs(grid, visited, i+1, j);
