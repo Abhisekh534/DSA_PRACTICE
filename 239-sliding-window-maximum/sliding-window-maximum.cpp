@@ -20,7 +20,7 @@ public:
         res.push_back(nums[dq.front()]);
 
         for(int i=k; i<n; i++){
-            if(!dq.empty() && dq.front()<=i-k) dq.pop_front();
+            if(!dq.empty() && dq.front()==i-k) dq.pop_front();
 
             while(!dq.empty() && nums[i]>=nums[dq.back()]) dq.pop_back();
 
