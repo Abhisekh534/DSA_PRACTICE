@@ -11,9 +11,9 @@ public:
 
         i=0, j=nums.size()/2;
 
-        for(int k=0; k<nums.size(); k+=2){
-            nums[k] = vec[i++];
-            nums[k+1] = vec[j++];
+        for(int k=0; k<nums.size()/2; k++){
+            nums[2*k] = vec[i++];
+            nums[2*k+1] = vec[j++];
         }
 
         return nums;
