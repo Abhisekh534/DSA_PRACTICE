@@ -6,8 +6,10 @@ public:
         visited[source] = true;
 
         for(int i=0; i<adj[source].size(); i++){
-            if(!visited[adj[source][i]]){
-                if(dfs(n, adj, adj[source][i], destination, visited)) return true;
+            int neighbor = adj[source][i];
+
+            if(!visited[neighbor]){
+                if(dfs(n, adj, neighbor, destination, visited)) return true;
             }
         }
 
@@ -20,7 +22,9 @@ public:
             adj[edges[i][0]].push_back(edges[i][1]);
             adj[edges[i][1]].push_back(edges[i][0]);
         }
+
         vector<bool>visited(n, false);
+        
         return dfs(n, adj, source, destination, visited);
     }
 };
