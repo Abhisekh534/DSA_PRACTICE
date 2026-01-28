@@ -8,11 +8,10 @@ public:
             if(s[i]=='|'){
                 i++;
                 while(i<s.size() && s[i]!='|') i++;
-                i++;
             }else{
                 if(s[i]=='*') count++;
-                i++;
             }
+            i++;
         }
 
         return count;
