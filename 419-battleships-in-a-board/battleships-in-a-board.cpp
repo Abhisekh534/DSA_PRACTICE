@@ -14,19 +14,15 @@ public:
                     board[i][j] = '.';
 
                     int x = i, y = j+1;
-                    while(y<m && board[x][y]){
-                        if(board[x][y]=='X'){
-                            board[x][y] = '.';
-                            y++;
-                        }else break;
+                    while(y<m && board[x][y]=='X'){
+                        board[x][y] = '.';
+                        y++;
                     }
 
                     x = i+1, y = j;
-                    while(x<n && board[x][y]){
-                        if(board[x][y]=='X'){
-                            board[x][y] = '.';
-                            x++;
-                        }else break;
+                    while(x<n && board[x][y]=='X'){
+                        board[x][y] = '.';
+                        x++;
                     }
                 }
             }
