@@ -4,20 +4,19 @@ public:
         int n = board.size();
         int m = board[0].size();
 
-        //using visited matrix
-        vector<vector<bool>>visited(n, vector<bool>(m, false));
-
+        //without using visited matrix
+        //visited me mark karne ki jagah seedha board me X ko . karte jaayenge
         int count = 0;
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                if(!visited[i][j] && board[i][j]=='X'){
+                if(board[i][j]=='X'){
                     count++;
-                    visited[i][j] = true;
+                    board[i][j] = '.';
 
                     int x = i, y = j+1;
                     while(y<m && board[x][y]){
                         if(board[x][y]=='X'){
-                            visited[x][y] = true;
+                            board[x][y] = '.';
                             y++;
                         }else break;
                     }
@@ -25,7 +24,7 @@ public:
                     x = i+1, y = j;
                     while(x<n && board[x][y]){
                         if(board[x][y]=='X'){
-                            visited[x][y] = true;
+                            board[x][y] = '.';
                             x++;
                         }else break;
                     }
