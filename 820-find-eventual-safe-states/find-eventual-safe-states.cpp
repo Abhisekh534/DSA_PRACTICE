@@ -14,12 +14,15 @@ public:
         }
 
         queue<int>q;
-        vector<int>ans;
+        vector<int>isSafe(n, false);
+        //isSafe na use karke direct bhi safe nodes ko vector<ans> mein daal sakte hain
+        //par vo sorted nahi hoga aur sort karne mein time complexity badh jaayegi
+        //isSafe se extra memory lagegi par vector<ans> mein ek pass mein saare nodes sorted order me aa jaayenge
 
         for(int i=0; i<n; i++){
             if(outDegree[i]==0){
                 q.push(i);
-                ans.push_back(i);
+                isSafe[i] = true;
             }
         }
 
@@ -29,17 +32,25 @@ public:
             q.pop();
 
             for(int i=0; i<graphM[node].size(); i++){
+
                 int predecessor = graphM[node][i];
 
                 outDegree[predecessor]--;
+
                 if(outDegree[predecessor]==0){
                     q.push(predecessor);
-                    ans.push_back(predecessor);
+                    isSafe[predecessor] = true;
                 }
+
             }
         }
 
-        sort(ans.begin(), ans.end());
+        vector<int>ans;
+
+        for(int i=0; i<n; i++){
+            if(isSafe[i]) ans.push_back(i);
+        }
+
         return ans;
     }
 };
