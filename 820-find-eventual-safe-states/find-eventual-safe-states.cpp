@@ -14,38 +14,32 @@ public:
         }
 
         queue<int>q;
-        vector<bool>isSafe(n, false);
+        vector<int>ans;
 
         for(int i=0; i<n; i++){
             if(outDegree[i]==0){
                 q.push(i);
-                isSafe[i]=true;
+                ans.push_back(i);
             }
         }
+
 
         while(!q.empty()){
             int node = q.front();
             q.pop();
 
             for(int i=0; i<graphM[node].size(); i++){
-                int pred = graphM[node][i];
+                int predecessor = graphM[node][i];
 
-                bool flag = true;
-
-                for(int j=0; j<graph[pred].size(); j++){
-                    int succPred = graph[pred][j];
-                    if(!isSafe[succPred]) flag = false;
-                }
-
-                if(flag){
-                    isSafe[pred] = true;
-                    q.push(pred);
+                outDegree[predecessor]--;
+                if(outDegree[predecessor]==0){
+                    q.push(predecessor);
+                    ans.push_back(predecessor);
                 }
             }
         }
 
-        vector<int>ans;
-        for(int i=0; i<n; i++) if(isSafe[i]) ans.push_back(i);
+        sort(ans.begin(), ans.end());
         return ans;
     }
 };
