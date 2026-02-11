@@ -10,7 +10,7 @@ public:
             }
 
             if(row!=0){
-                if(previousRow!=0) ans+=(row*previousRow);\
+                ans+=(row*previousRow);
                 previousRow = row;
                 row = 0;
             }
