@@ -6,7 +6,7 @@ public:
 
         for(int i=0; i<instructions.size(); i++){
             if(instructions[i]=='L') dir = (dir+1)%4;
-            if(instructions[i]=='R') dir = ((dir-1)%4 + 4)%4;
+            if(instructions[i]=='R') dir = (dir+3)%4;
 
             if(instructions[i]=='G'){
                 if(dir==0) y++;
