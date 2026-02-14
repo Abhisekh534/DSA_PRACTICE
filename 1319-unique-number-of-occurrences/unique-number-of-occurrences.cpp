@@ -7,7 +7,7 @@ public:
        }
 
        for(auto&x : um){
-        if(um2.find(x.second)!=um2.end()) return false;
+        if(um2.count(x.second)) return false;
         um2[x.second]++;
        }
 
