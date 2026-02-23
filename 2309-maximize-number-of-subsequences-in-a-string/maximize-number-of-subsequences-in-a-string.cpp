@@ -10,7 +10,10 @@ public:
         }
 
         char x;
-        if(fCount>sCount){
+        if(first==second){
+            return ((long long)fCount*(fCount+1))/2;
+        }
+        else if(fCount>sCount){
             char x = second;
             text = text + second;
         }else{
