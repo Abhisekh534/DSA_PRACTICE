@@ -3,29 +3,35 @@ public:
     long long maximumSubsequenceCount(string text, string pattern) {
         char first = pattern[0], second = pattern[1];
 
-        int fCount = 0, sCount = 0;
-        for(int i=0; i<text.size(); i++){
-            if(text[i]==first) fCount++;
-            else if(text[i]==second) sCount++;
-        }
-
-        char x;
-        if(fCount>sCount){
-            char x = second;
-            text = text + second;
-        }else{
-            char x = first;
-            text = first + text;
-        }
         long long ans = 0;
         vector<int>fIndex;
         vector<int>sIndex;
 
         for(int i=0; i<text.size(); i++){
             if(text[i]==first) fIndex.push_back(i);
-            if(text[i]==second) sIndex.push_back(i); 
-            //agar first second same hua to index overlap bhi ho sakte hain isliye if else ki jagah if if use kiya hai
+            else if(text[i]==second) sIndex.push_back(i); 
         }
+
+        //agar first aur second dono same hai to sirf fIndex me jaayega sIndex me nahi due to else if
+        //jo ki agar ham two pointers wale approach se kare to dikkat de sakta hai
+        //but first second same wale case ko ham easy maths lagake bhi solve kar sakte hain
+
+        if(first==second){
+            long long s = fIndex.size();
+            return ((s*(s+1))/2);
+        } 
+
+        char x;
+        if(fIndex.size()>sIndex.size()){
+            char x = second;
+            text = text + second;
+            sIndex.push_back(text.size());
+        }else{
+            char x = first;
+            text = first + text;
+            fIndex.insert(fIndex.begin(), -1);
+        }
+
 
         int i=0, j=0;
 
