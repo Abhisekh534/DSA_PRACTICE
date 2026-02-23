@@ -12,10 +12,6 @@ public:
             matrix[i][n-1] += min(matrix[i+1][n-2], matrix[i+1][n-1]);
         }
 
-        int mini = INT_MAX;
-
-        for(int j=0; j<n; j++) mini = min(mini, matrix[0][j]);
-
-        return mini;
+        return *min_element(matrix[0].begin(), matrix[0].end());
     }
 };
