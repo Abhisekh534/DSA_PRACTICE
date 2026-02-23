@@ -6,7 +6,7 @@ public:
         int fCount = 0, sCount = 0;
         for(int i=0; i<text.size(); i++){
             if(text[i]==first) fCount++;
-            if(text[i]==second) sCount++;
+            else if(text[i]==second) sCount++;
         }
 
         char x;
