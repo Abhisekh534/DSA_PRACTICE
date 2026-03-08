@@ -8,8 +8,8 @@ public:
 
         int mini = INT_MAX;
 
-        for(int i=0; i<coins.size(); i++){
-            int ans = solve(coins, dp, amount-coins[i]);
+        for(int coin : coins){
+            int ans = solve(coins, dp, amount-coin);
 
             if(ans!=INT_MAX) mini = min(mini, 1+ans);
         }
