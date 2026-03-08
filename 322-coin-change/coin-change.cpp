@@ -17,6 +17,7 @@ public:
         return dp[amount] = mini;
     }
     int coinChange(vector<int>& coins, int amount) {
+        //top down(recursion) + memoization
         vector<int>dp(amount+1, -1);
 
         int ans = solve(coins, dp, amount);
