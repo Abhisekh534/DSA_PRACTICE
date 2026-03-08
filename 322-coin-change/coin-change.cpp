@@ -18,9 +18,9 @@ public:
     }
     int coinChange(vector<int>& coins, int amount) {
         vector<int>dp(amount+1, -1);
+
         int ans = solve(coins, dp, amount);
 
-        if(ans==INT_MAX) return -1;
-        return ans;
+        return (ans==INT_MAX) ? -1 : ans;
     }
 };
