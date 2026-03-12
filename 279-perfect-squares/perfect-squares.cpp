@@ -15,9 +15,8 @@ public:
 
             int mini = INT_MAX;
             for(int square : squares){
-                if(i-square>=0){
-                    mini = min(mini, 1+dp[i-square]);
-                }
+                if(square>i) break;
+                mini = min(mini, 1+dp[i-square]);
             }
             dp[i] = mini;
 
