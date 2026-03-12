@@ -1,33 +1,30 @@
 class Solution {
 public:
-    int numSquares(int n) {
-        queue<int> q;
-        vector<bool> visited(n+1, false); 
+    int solve(vector<int>&dp, vector<int>&squares, int n){
+        if(n==0) return 0;
+        if(n<0) return INT_MAX;
 
-        q.push(n);
-        visited[n] = true;
+        if(dp[n]!=-1) return dp[n];
 
-        int steps = 0;
+        int mini = INT_MAX;
 
-        while(!q.empty()){
-            int size = q.size();
-            steps++;
+        for(int square : squares){
+            int ans = solve(dp, squares, n-square);
 
-            for(int i=0; i<size; i++){
-                int curr = q.front();
-                q.pop();
-
-                for(int j=1; j*j<=curr; j++){
-                    int next = curr - j*j;
-                    if(next==0) return steps;
-
-                    if(!visited[next]){
-                        visited[next] = true;
-                        q.push(next);
-                    }
-                }
-            }
+            if(ans!=INT_MAX) mini = min(mini, 1+ans);
         }
-        return -1;
+
+        return dp[n] = mini;
+    }
+
+    int numSquares(int n) {
+        vector<int>squares;
+
+        for(int i=1; i*i<=n; i++){
+            squares.push_back(i*i);
+        }
+
+        vector<int>dp(n+1, -1);
+        return solve(dp, squares, n);
     }
 };
