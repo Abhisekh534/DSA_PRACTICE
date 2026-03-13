@@ -1,6 +1,8 @@
 class Solution {
 public:
     int solve(vector<int>&days, vector<int>&costs, vector<int>&dp, int i){
+        //index function parameter hai, amount function parameter nahi hai
+        //amount ko function parameter banane se dp vector confuse ho jaayega
         int n = days.size();
         if(i>=n) return 0;
 
