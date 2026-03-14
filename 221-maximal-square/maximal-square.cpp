@@ -1,12 +1,8 @@
 class Solution {
 public:
     int solve(vector<vector<char>>&matrix, vector<vector<int>>&dp, int i, int j, int&maxi){
-        if(i==0){
-            if(matrix[0][j]=='1') return 1; 
-            else return 0;
-        }
-        if(j==0){
-            if(matrix[i][0]=='1') return 1; 
+        if(i==0 || j==0){
+            if(matrix[i][j]=='1') return 1; 
             else return 0;
         }
 
