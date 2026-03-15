@@ -1,14 +1,13 @@
 class Solution {
 public:
-    int solve(vector<int>&values, vector<vector<int>>&dp, int i, int j){
+    int solve(vector<int>&v, vector<vector<int>>&dp, int i, int j){
         if(j-i==1) return 0;
 
         if(dp[i][j]!=-1) return dp[i][j];
 
         int mini = INT_MAX;
         for(int x=i+1; x<j; x++){
-            int ans = values[i]*values[x]*values[j] + solve(values, dp, i, x) + solve(values, dp, x, j);
-            mini = min(mini, ans);
+            mini = min(mini, v[i]*v[x]*v[j] + solve(v, dp, i, x) + solve(v, dp, x, j));
         }
 
         return dp[i][j] = mini;
