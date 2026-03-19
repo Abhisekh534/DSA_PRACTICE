@@ -3,7 +3,9 @@ public:
     int solve(vector<int>&nums, vector<int>&LIS, int i){
         int n = nums.size();
 
-        if(LIS[i]!=1) return LIS[i];
+        if(LIS[i]!=-1) return LIS[i];
+
+        LIS[i] = 1;
 
         for(int j=i+1; j<n; j++){
             if(nums[i]<nums[j]) LIS[i] = max(LIS[i], 1+solve(nums, LIS, j));
@@ -13,7 +15,7 @@ public:
     }
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
-        vector<int>LIS(n, 1);
+        vector<int>LIS(n, -1);
 
         int maxi = 1;
 
