@@ -15,8 +15,8 @@ public:
             dp[i] = cuboids[i][2]; //height
         }
 
-        int maxi = INT_MIN;
-        for(int i=n-1; i>-1; i--){
+        int maxi = cuboids[n-1][2];
+        for(int i=n-2; i>-1; i--){
 
             for(int j=i+1; j<n; j++){
                 if(cuboids[i][0]<=cuboids[j][0] && cuboids[i][1]<=cuboids[j][1] && cuboids[i][2]<=cuboids[j][2]){
