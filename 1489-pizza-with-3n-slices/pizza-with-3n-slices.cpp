@@ -1,14 +1,14 @@
 class Solution {
 public:
-    int solve(int i, int j, vector<int>&slices, int r, vector<vector<int>>&dp){
-        if(r==0 || i>j) return 0;
+    int solve(int i, int j, vector<int>&slices, int rem, vector<vector<int>>&dp){
+        if(rem==0 || i>j) return 0;
 
-        if(dp[i][r]!=-1) return dp[i][r];
+        if(dp[i][rem]!=-1) return dp[i][rem];
 
-        int take = slices[i] + solve(i+2, j, slices, r-1, dp);
-        int skip = solve(i+1, j, slices, r, dp);
+        int take = slices[i] + solve(i+2, j, slices, rem-1, dp);
+        int skip = solve(i+1, j, slices, rem, dp);
 
-        return dp[i][r] = max(take, skip);
+        return dp[i][rem] = max(take, skip);
     }
     int maxSizeSlices(vector<int>& slices) {
         int n = slices.size();
