@@ -4,34 +4,26 @@ public:
         int m = grid.size();
         int n = grid[0].size();
 
-        vector<long long>rows(m);
-        for(int i=0; i<m; i++){
-            long long sum = 0;
-            for(int j=0; j<n; j++) sum+=(grid[i][j]);
-            rows[i] = sum;
-        }
-
-        vector<long long>columns(n);
-
-        for(int j=0; j<n; j++){
-            long long sum = 0;
-            for(int i=0; i<m; i++) sum+=(grid[i][j]);
-            columns[j] = sum;
-        }
-
         long long total = 0;
 
-        for(long long x : columns){
-            total+=(x);
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                total+=(grid[i][j]);
+            }
         }
+
+        if(total%2 == 1) return false;
 
         long long pre = 0;
         long long post = total;
 
 
         for(int i=0; i<m; i++){
-            pre+=(rows[i]);
-            post-=(rows[i]);
+            long long rowSum = 0;
+            for(int j=0; j<n; j++) rowSum+=(grid[i][j]);
+
+            pre+=rowSum;
+            post-=rowSum;
 
             if(pre==post) return true;
         }
@@ -40,9 +32,12 @@ public:
         post = total;
 
 
-        for(int i=0; i<n; i++){
-            pre+=(columns[i]);
-            post-=(columns[i]);
+        for(int j=0; j<n; j++){
+            long long columnSum = 0;
+            for(int i=0; i<m; i++) columnSum+=(grid[i][j]);
+
+            pre+=columnSum;
+            post-=columnSum;
 
             if(pre==post) return true;
         }
