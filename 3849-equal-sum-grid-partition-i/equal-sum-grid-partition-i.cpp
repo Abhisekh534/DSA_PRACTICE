@@ -25,24 +25,24 @@ public:
             total+=(x);
         }
 
-        long long pre = total;
-        long long post = 0;
+        long long pre = 0;
+        long long post = total;
 
 
-        for(int i=m-1; i>0; i--){
-            pre-=(rows[i]);
-            post+=(rows[i]);
+        for(int i=0; i<m; i++){
+            pre+=(rows[i]);
+            post-=(rows[i]);
 
             if(pre==post) return true;
         }
 
-        pre = total;
-        post = 0;
+        pre = 0;
+        post = total;
 
 
-        for(int i=n-1; i>0; i--){
-            pre-=(columns[i]);
-            post+=(columns[i]);
+        for(int i=0; i<n; i++){
+            pre+=(columns[i]);
+            post-=(columns[i]);
 
             if(pre==post) return true;
         }
