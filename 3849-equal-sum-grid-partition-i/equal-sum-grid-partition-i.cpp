@@ -3,6 +3,7 @@ public:
     bool canPartitionGrid(vector<vector<int>>& grid) {
         int m = grid.size();
         int n = grid[0].size();
+
         vector<long long>rows(m);
         for(int i=0; i<m; i++){
             long long sum = 0;
@@ -18,12 +19,14 @@ public:
             columns[j] = sum;
         }
 
-        long long pre = 0;
-        long long post = 0;
+        long long total = 0;
 
-        for(int i=0; i<m; i++){
-            pre+=(rows[i]);
+        for(long long x : columns){
+            total+=(x);
         }
+
+        long long pre = total;
+        long long post = 0;
 
 
         for(int i=m-1; i>0; i--){
@@ -33,12 +36,8 @@ public:
             if(pre==post) return true;
         }
 
-        pre = 0;
+        pre = total;
         post = 0;
-
-        for(int i=0; i<n; i++){
-            pre+=(columns[i]);
-        }
 
 
         for(int i=n-1; i>0; i--){
