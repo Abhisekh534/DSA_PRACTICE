@@ -1,19 +1,38 @@
 class Solution {
 public:
+    const int MOD = 1e9+7;
+
+    int solve(vector<vector<long long>>& dp, int k, int i, int j){
+
+        if(i == 0) return (j == 0);
+
+        if(j > i * k) return 0;
+        if(j < i) return 0;
+
+        if(dp[i][j] != -1) return dp[i][j];
+
+        if(j - k - 1 < 0){
+            return dp[i][j] = (
+                solve(dp, k, i, j-1) + 
+                solve(dp, k, i-1, j-1)
+            ) % MOD;
+        }
+        else{
+            long long a = solve(dp, k, i, j-1);
+            long long b = solve(dp, k, i-1, j-k-1);
+            long long c = solve(dp, k, i-1, j-1);
+
+            long long res = (a - b) % MOD;
+            if(res < 0) res += MOD;
+
+            res = (res + c) % MOD;
+
+            return dp[i][j] = res;
+        }
+    }
+
     int numRollsToTarget(int n, int k, int target) {
-        vector<vector<long long>>dp(n+1, vector<long long>(target+1, 0LL));
-
-        for(int j=1; j<=k && j<=target; j++){
-            dp[1][j] = 1;
-        }
-
-        for(int i=2; i<=n; i++){
-            for(int j=1; j<=i*k && j<=target; j++){
-                if(j-k-1<0) dp[i][j] = (dp[i][j-1] + dp[i-1][j-1])%1000000007;
-                else dp[i][j] = (dp[i][j-1] - dp[i-1][j-k-1] + dp[i-1][j-1] + 1000000007)%1000000007;
-            }
-        }
-
-        return (dp[n][target]);
+        vector<vector<long long>> dp(n+1, vector<long long>(target+1, -1));
+        return solve(dp, k, n, target);
     }
 };
