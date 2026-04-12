@@ -2,16 +2,16 @@ class Solution {
 public:
     int n;
 
-    void dfs(vector<vector<int>>&isConnected, int i, vector<int>&visited){
-        visited[i] = 1;
+    void dfs(vector<vector<int>>&isConnected, int i, vector<bool>&visited){
+        visited[i] = true;
 
         for(int j=0; j<n; j++){
-            if(isConnected[i][j] && !visited[j]) dfs(isConnected, j, visited);
+            if(isConnected[i][j]==1 && !visited[j]) dfs(isConnected, j, visited);
         }
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
         n = isConnected.size();
-        vector<int>visited(n, 0);
+        vector<bool>visited(n, false);
 
         int count = 0;
 
