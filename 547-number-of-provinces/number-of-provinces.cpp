@@ -1,8 +1,8 @@
 class Solution {
 public:
+    int n;
+
     void dfs(vector<vector<int>>&isConnected, int i, vector<int>&visited){
-        int n = isConnected.size();
-        
         visited[i] = 1;
 
         for(int j=0; j<n; j++){
@@ -10,7 +10,7 @@ public:
         }
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size();
+        n = isConnected.size();
         vector<int>visited(n, 0);
 
         int count = 0;
