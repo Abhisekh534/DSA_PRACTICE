@@ -7,12 +7,17 @@ public:
         int maxi = 0;
 
         while(j<s.size()){
-            if(map.find(s[j])!=map.end()) i = max(i, map[s[j]]+1);
-            
-            map[s[j]]=j;
+            map[s[j]]++;
+            if(map[s[j]]==2){
+                while(map[s[i]]!=2){
+                    map[s[i]]--;
+                    i++;
+                }
+                map[s[i]]--;
+                i++;
+            }
 
-            maxi = max(j-i+1, maxi);
-            
+            maxi = max(maxi, j-i+1);
             j++;
         }
 
