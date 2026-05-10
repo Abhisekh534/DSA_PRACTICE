@@ -7,11 +7,14 @@ public:
         vector<vector<int>>dist(n, vector<int>(m, INT_MAX));
         queue<pair<int, int>>q;
 
+        int count = 0;
+
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 if(mat[i][j]==0){
                     dist[i][j] = 0;
                     q.push({i, j});
+                    count++;
                 }
             }
         }
@@ -29,9 +32,11 @@ public:
                 int ny = y + dy[k];
 
                 if(nx>=0 && ny>=0 && nx<n && ny<m){
-                    if(dist[x][y]+1<dist[nx][ny]){
+                    if(dist[nx][ny]>dist[x][y]+1){
                         dist[nx][ny] = 1 + dist[x][y];
                         q.push({nx, ny});
+                        count++;
+                        if(count==m*n) return dist;
                     }
                 }
             }
