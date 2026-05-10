@@ -3,7 +3,7 @@ public:
     void dfs(vector<vector<int>>& image, int sr, int sc, int color, int ocolor){
         int n = image.size();
         int m = image[0].size();
-        if(sr<0 || sr==n || sc<0 || sc==m || image[sr][sc]!=ocolor  || image[sr][sc]==color) return;
+        if(sr<0 || sr==n || sc<0 || sc==m || image[sr][sc]!=ocolor) return;
 
         image[sr][sc] = color;
 
@@ -17,6 +17,9 @@ public:
         int n = image.size();
         int m = image[0].size();
         int ocolor = image[sr][sc];
+
+        // without this small optimization , we would have needed a visited matrix
+        if(ocolor==color) return image;
 
         dfs(image, sr, sc, color, ocolor);
 
