@@ -17,8 +17,10 @@ public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
         int n = image.size();
         int m = image[0].size();
-        vector<vector<bool>> visited(n, vector<bool>(m, false));
         int ocolor = image[sr][sc];
+        if(ocolor==color) return image;
+
+        vector<vector<bool>> visited(n, vector<bool>(m, false));
         dfs(image, sr, sc, color, ocolor, visited);
 
 
