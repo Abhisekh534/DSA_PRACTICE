@@ -7,7 +7,6 @@ public:
         vector<vector<int>>dist(n, vector<int>(m, INT_MAX));
         queue<pair<int, int>>q;
 
-
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 if(mat[i][j]==0){
@@ -30,7 +29,7 @@ public:
                 int ny = y + dy[k];
 
                 if(nx>=0 && ny>=0 && nx<n && ny<m){
-                    if(dist[nx][ny]>dist[x][y]+1){
+                    if(dist[nx][ny]==INT_MAX){
                         dist[nx][ny] = 1 + dist[x][y];
                         q.push({nx, ny});
                     }
