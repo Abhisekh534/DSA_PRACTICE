@@ -27,7 +27,7 @@ public:
                 int ky = y + v[i];
 
                 if(kx>-1 && kx<n && ky>-1 && ky<m){
-                    if(dist[kx][ky]>dist[x][y]+1){
+                    if(dist[kx][ky]==INT_MAX){
                         dist[kx][ky] = dist[x][y] + 1;
                         q.push({kx, ky});
                     }
