@@ -3,10 +3,9 @@ public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
         int n = mat.size();
         int m = mat[0].size();
-
         vector<vector<int>>dist(n, vector<int>(m, INT_MAX));
-        queue<pair<int, int>>q;
 
+        queue<pair<int, int>>q;
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 if(mat[i][j]==0){
@@ -16,27 +15,27 @@ public:
             }
         }
 
-        //direction vectors for checking the four direction using a loop
-        int dx[4] = {1, -1, 0, 0};
-        int dy[4] = {0, 0, 1, -1};
+        int u[4] = {0, 0, 1, -1};
+        int v[4] = {1, -1, 0, 0};
 
         while(!q.empty()){
-            auto [x, y] = q.front();
+            auto[x, y] = q.front();
             q.pop();
 
-            for(int k=0; k<4; k++){
-                int nx = x + dx[k];
-                int ny = y + dy[k];
+            for(int i=0; i<4; i++){
+                int kx = x + u[i];
+                int ky = y + v[i];
 
-                if(nx>=0 && ny>=0 && nx<n && ny<m){
-                    if(dist[nx][ny]==INT_MAX){
-                        dist[nx][ny] = 1 + dist[x][y];
-                        q.push({nx, ny});
+                if(kx>-1 && kx<n && ky>-1 && ky<m){
+                    if(dist[kx][ky]>dist[x][y]+1){
+                        dist[kx][ky] = dist[x][y] + 1;
+                        q.push({kx, ky});
                     }
                 }
             }
         }
 
         return dist;
+
     }
 };
