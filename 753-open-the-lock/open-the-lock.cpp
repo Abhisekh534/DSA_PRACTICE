@@ -16,40 +16,38 @@ public:
         q.push("0000");
         visited[0] = true;
 
-        int qSize = 1;
+        int qSize;
 
         while(!q.empty()){
-            if(qSize==0){
-                turns++;
-                qSize = q.size();
-            }
+            qSize = q.size();
 
-            string pattern = q.front();
-            q.pop();
-            qSize--;
+            while(qSize--){
 
-            for(int i=0; i<4; i++){
-                string possible1 = pattern;
-                if(possible1[i]<'9') possible1[i]++;
-                else possible1[i] = '0';
+                string pattern = q.front();
+                if(pattern==target) return turns;
+                q.pop();
 
-                string possible2 = pattern;
-                if(possible2[i]>'0') possible2[i]--;
-                else possible2[i] = '9';
+                for(int i=0; i<4; i++){
+                    string possible1 = pattern;
+                    if(possible1[i]<'9') possible1[i]++;
+                    else possible1[i] = '0';
 
-                if(possible1 == target) return turns+1;
-                if(possible2 == target) return turns+1;
+                    string possible2 = pattern;
+                    if(possible2[i]>'0') possible2[i]--;
+                    else possible2[i] = '9';
 
-                if(!visited[stoi(possible1)] && dSet.find(possible1)==dSet.end()){
-                    q.push(possible1);
-                    visited[stoi(possible1)] = true;
-                }
+                    if(!visited[stoi(possible1)] && dSet.find(possible1)==dSet.end()){
+                        q.push(possible1);
+                        visited[stoi(possible1)] = true;
+                    }
 
-                if(!visited[stoi(possible2)] && dSet.find(possible2)==dSet.end()){
-                    q.push(possible2);
-                    visited[stoi(possible2)] = true;
+                    if(!visited[stoi(possible2)] && dSet.find(possible2)==dSet.end()){
+                        q.push(possible2);
+                        visited[stoi(possible2)] = true;
+                    }
                 }
             }
+            turns++;
         }
 
         return -1;
