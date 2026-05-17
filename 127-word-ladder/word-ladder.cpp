@@ -1,17 +1,16 @@
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_map<string, bool>wordMap;
+        unordered_set<string>wordSet;
         
         for(string word : wordList){
-            wordMap[word] = false;
+            wordSet.insert(word);
         }
 
-        if(!wordMap.count(endWord)) return 0;
+        if(!wordSet.count(endWord)) return 0;
 
         queue<string>q;
         q.push(beginWord);
-        wordMap[beginWord] = true;
 
         int len = 1;
 
@@ -29,9 +28,9 @@ public:
                         if(word[i]==x) continue;
                         nextWord[i]=x;
 
-                        if(wordMap.count(nextWord) && !wordMap[nextWord]){
+                        if(wordSet.count(nextWord)){
                             q.push(nextWord);
-                            wordMap[nextWord] = true;
+                            wordSet.erase(nextWord);
                         }
                     }
                 }
