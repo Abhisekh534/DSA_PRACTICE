@@ -28,11 +28,11 @@ public:
 
                 q.pop();
 
-                if(x==n-1 && y==n-1) return len;
-
                 for(int i=0; i<8; i++){
                     int ix = x + dx[i];
                     int iy = y + dy[i];
+
+                    if(ix==n-1 && iy==n-1) return len+1;
 
                     if(ix>-1 && ix<n && iy>-1 && iy<n && grid[ix][iy]!=1 && !visited[ix][iy]){
                         q.push({ix, iy});
