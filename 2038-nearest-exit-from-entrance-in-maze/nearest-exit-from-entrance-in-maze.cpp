@@ -24,7 +24,8 @@ public:
 
                 q.pop();
 
-                if((x==0 || x==n-1 || y==0 || y==m-1) && maze[x][y]=='.' && !(x==entrance[0] && y==entrance[1])) return steps;
+                if((x==0 || x==n-1 || y==0 || y==m-1) && !(x==entrance[0] && y==entrance[1])) return steps;
+                //maze[x][y]=='.' check karna zaroori nahi hai kyunki queue mein ham sirf . hi daal rahe hain
 
                 for(int i=0; i<4; i++){
                     int ix = x + dx[i];
