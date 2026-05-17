@@ -17,7 +17,7 @@ public:
             }
         }
 
-        // queue mein vahi courses enter kar rahe hain jinki dependencies poori ho chuki
+        // queue mein vahi courses enter kar rahe hain jinki prerequisites poori ho chuki
         // par queue mein se elements aake jaa bhi rahe hain
         // to kitne total courses queue mein at some point of time aa chuke hain gin'ne ke liye count variable le sakte
         int count = 0;
