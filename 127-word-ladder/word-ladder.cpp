@@ -23,8 +23,8 @@ public:
                 if(word==endWord) return len;
 
                 for(int i=0; i<word.size(); i++){
+                    string nextWord = word;
                     for(char x='a'; x<='z'; x++){
-                        string nextWord = word;
                         if(word[i]==x) continue;
                         nextWord[i]=x;
 
