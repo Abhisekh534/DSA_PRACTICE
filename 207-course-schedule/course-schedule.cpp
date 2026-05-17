@@ -10,21 +10,23 @@ public:
         }
 
         queue<int>q;
-        // queue mein jo bhi courses enter kar rahe hain yaani ki vo complete kiye jaa sakte hain
-        // par queue mein se elements aake jaa bhi rahe hain
-        // to kitne total courses queue mein at some point of time aa chuke hain gin'ne ke liye count variable le sakte
-        int count = 0;
 
         for(int i=0; i<numCourses; i++){
             if(inDegree[i]==0){
                 q.push(i);
-                count++;
             }
         }
+
+        // queue mein vahi courses enter kar rahe hain jinki dependencies poori ho chuki
+        // par queue mein se elements aake jaa bhi rahe hain
+        // to kitne total courses queue mein at some point of time aa chuke hain gin'ne ke liye count variable le sakte
+        int count = 0;
+        // count ham push karne ke time ya pop karne ke time kar skate hain
 
         while(!q.empty()){
             int node = q.front();
             q.pop();
+            count++;
 
             for(int i=0; i<adj[node].size(); i++){
                 int nextNode = adj[node][i];
@@ -32,7 +34,6 @@ public:
                 inDegree[nextNode]--;
                 if(inDegree[nextNode]==0){
                     q.push(nextNode);
-                    count++;
                 }
             }
         }
