@@ -1,20 +1,20 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>>adj(numCourses);
         vector<int>inDegree(numCourses, 0);
+        vector<vector<int>>adj(numCourses);
 
-        for(int i=0; i<prerequisites.size(); i++){
-            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
-            inDegree[prerequisites[i][0]]++;
+        for(vector<int> x : prerequisites){
+            inDegree[x[0]]++;
+            adj[x[1]].push_back(x[0]);
         }
 
         queue<int>q;
+        // queue mein jo bhi courses enter kar rahe hain yaani ki vo complete kiye jaa sakte hain
+        // par queue mein se elements aake jaa bhi rahe hain
+        // to kitne total courses queue mein at some point of time aa chuke hain gin'ne ke liye count variable le sakte
         int count = 0;
-        //instaed of using extra memory for topo sort , we can just count the number of nodes which will qualify for array topo
-        //and compare it with the number of nodes, count = number of nodes -> no cycle/deadlock
-        //count <> number of nodes -> cycle/deadlock present
-         
+
         for(int i=0; i<numCourses; i++){
             if(inDegree[i]==0){
                 q.push(i);
@@ -25,20 +25,18 @@ public:
         while(!q.empty()){
             int node = q.front();
             q.pop();
+
             for(int i=0; i<adj[node].size(); i++){
+                int nextNode = adj[node][i];
 
-                int neighbor = adj[node][i];
-                inDegree[neighbor]--;
-
-                if(inDegree[neighbor]==0){
-                    q.push(neighbor);
+                inDegree[nextNode]--;
+                if(inDegree[nextNode]==0){
+                    q.push(nextNode);
                     count++;
                 }
-            
             }
         }
 
-        if(count==numCourses) return true;
-        return false;
+        return (count==numCourses);
     }
 };
