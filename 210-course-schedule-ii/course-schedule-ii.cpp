@@ -1,14 +1,13 @@
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>>adj(numCourses);
         vector<int>inDegree(numCourses, 0);
+        vector<vector<int>>adj(numCourses);
 
-        for(int i=0; i<prerequisites.size(); i++){
-            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
-            inDegree[prerequisites[i][0]]++;
+        for(vector<int> x : prerequisites){
+            inDegree[x[0]]++;
+            adj[x[1]].push_back(x[0]);
         }
-
 
         queue<int>q;
         vector<int>topo;
@@ -23,20 +22,19 @@ public:
         while(!q.empty()){
             int node = q.front();
             q.pop();
-            for(int i=0; i<adj[node].size(); i++){
-                
-                int neighbor = adj[node][i];
-                inDegree[neighbor]--;
 
-                if(inDegree[neighbor]==0){
-                    q.push(neighbor);
-                    topo.push_back(neighbor);
+            for(int i=0; i<adj[node].size(); i++){
+                int nextNode = adj[node][i];
+
+                inDegree[nextNode]--;
+                if(inDegree[nextNode]==0){
+                    q.push(nextNode);
+                    topo.push_back(nextNode);
                 }
-            
             }
         }
 
         if(topo.size()==numCourses) return topo;
-        return {};
+        else return {};
     }
 };
