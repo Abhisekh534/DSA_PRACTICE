@@ -8,13 +8,14 @@ public:
         }
 
         vector<int>dist(n, INT_MAX);
+        //har distance ke liye minimum cost
 
         queue<pair<int, int>>q;
 
         q.push({src, 0});
         dist[src] = 0;
 
-        int stops = -1;
+        int stops = 0;
 
         int minPrice = INT_MAX;
 
@@ -24,8 +25,6 @@ public:
                 int curr = q.front().first;
                 int price = q.front().second;
                 q.pop();
-
-                if(curr==dst) minPrice = min(price, minPrice);
 
                 for(pair<int, int>x : adjList[curr]){
                     if(price+ x.second < dist[x.first]){
@@ -37,7 +36,7 @@ public:
             stops++;
         }
 
-        if(minPrice!=INT_MAX) return minPrice;
+        if(dist[dst]!=INT_MAX) return dist[dst];
         return -1;
     }
 };
