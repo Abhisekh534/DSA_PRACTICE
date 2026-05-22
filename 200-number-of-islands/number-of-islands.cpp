@@ -1,31 +1,30 @@
 class Solution {
 public:
-    void dfs(vector<vector<char>>&grid, int i, int j){
-        
-        if(i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size()) return;
-        if(grid[i][j]=='0') return;
-        
-        //jahaan khade ho use check karo na ki possible next steps ko
+    void dfs(vector<vector<char>>&grid, int i, int j, vector<vector<int>>&visited){
+        int n = grid.size();
+        int m = grid[0].size();
 
-        grid[i][j] = '0';
+        if(i<0 || i==n || j<0 || j==m || grid[i][j]=='0' || visited[i][j]) return;
 
-        //instead of calling dfs function 4 times , we can create direction arrays and use a loop
+        visited[i][j] = true;
 
-        int dx[4] = {1, -1, 0, 0};
-        int dy[4] = {0, 0, 1, -1};
-        
-        for(int k=0; k<4; k++){
-            dfs(grid, i+dx[k], j+dy[k]);
-        }
-
+        dfs(grid, i, j-1, visited);
+        dfs(grid, i, j+1, visited);
+        dfs(grid, i-1, j, visited);
+        dfs(grid, i+1, j, visited);
     }
     int numIslands(vector<vector<char>>& grid) {
-        //visited use na karke seedha grid me hi 1 ko 0 kar denge udhar dobara jaayega hi nahi
+        int n = grid.size();
+        int m = grid[0].size();
+
         int count = 0;
-        for(int i=0; i<grid.size(); i++){
-            for(int j=0; j<grid[0].size(); j++){
-                if(grid[i][j]=='1'){
-                    dfs(grid, i, j);
+
+        vector<vector<int>>visited(n, vector<int>(m, false));
+
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j]=='1' && !visited[i][j]){
+                    dfs(grid, i, j, visited);
                     count++;
                 }
             }
