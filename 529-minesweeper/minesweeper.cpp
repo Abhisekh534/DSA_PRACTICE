@@ -16,10 +16,8 @@ public:
             int dirY[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
             
             queue<pair<int, int>>q;
-            vector<vector<int>>visited(n, vector<int>(m, false));
 
             q.push({x, y});
-            visited[x][y] = true;
 
             while(!q.empty()){
                 int nodeX = q.front().first;
@@ -45,14 +43,14 @@ public:
                         int ky = nodeY + dirY[k];
 
                         if(kx>-1 && kx<n && ky>-1 && ky<m){
-                            if(!visited[kx][ky] && board[kx][ky]=='E'){
+                            if(board[kx][ky]=='E'){
                                 q.push({kx, ky});
-                                visited[kx][ky] = true;
+                                board[kx][ky] = 'B';
                             }
                         }
-                    }
-                    
+                    }  
                 }
+
                 else board[nodeX][nodeY] = count + '0';
             }
         }
