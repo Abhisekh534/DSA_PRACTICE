@@ -11,7 +11,7 @@ public:
         char temp = board[i][j];
         board[i][j] = '#';
 
-        int found = dfs(board, word, i, j-1, index+1) || 
+        bool found = dfs(board, word, i, j-1, index+1) || 
                     dfs(board, word, i, j+1, index+1) ||
                     dfs(board, word, i-1, j, index+1) ||
                     dfs(board, word, i+1, j, index+1);
