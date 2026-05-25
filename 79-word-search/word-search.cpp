@@ -11,14 +11,16 @@ public:
         char temp = board[i][j];
         board[i][j] = '#';
 
-        int left = dfs(board, word, i, j-1, index+1);
-        int right = dfs(board, word, i, j+1, index+1);
-        int top = dfs(board, word, i-1, j, index+1);
-        int down = dfs(board, word, i+1, j, index+1);
+        int found = dfs(board, word, i, j-1, index+1) || 
+                    dfs(board, word, i, j+1, index+1) ||
+                    dfs(board, word, i-1, j, index+1) ||
+                    dfs(board, word, i+1, j, index+1);
+
+        //alag se left right top bottom calculate karne se 4 recursive calls chali jaayengi no matter ki first call me hi true mil jaaye aur baaki calls redundant ho jaaye
 
         board[i][j] = temp;
         
-        return left || right || top || down;
+        return found;
 
     }
     bool exist(vector<vector<char>>& board, string word) {
