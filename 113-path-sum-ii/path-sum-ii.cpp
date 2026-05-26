@@ -16,15 +16,12 @@ public:
         temp.push_back(node->val);
 
         if(!node->left && !node->right){
-
             if(sum==targetSum) ans.push_back(temp);
-        
-        }else{
-            
-            if(node->left) dfs(ans, temp, node->left, targetSum, sum);
-            if(node->right) dfs(ans, temp, node->right, targetSum, sum);
-        
         }
+
+        if(node->left) dfs(ans, temp, node->left, targetSum, sum);
+        if(node->right) dfs(ans, temp, node->right, targetSum, sum);
+        
         
         sum-=node->val;
         temp.pop_back();
