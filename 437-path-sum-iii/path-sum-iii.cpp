@@ -11,28 +11,25 @@
  */
 class Solution {
 public:
-    void solve(int&count, TreeNode* node, int targetSum, long long sum){
-        if(node==NULL) return;
+    void dfs(int&count, TreeNode* root, int targetSum, long long currSum){
+        if(root==NULL) return;
 
-        if(sum+node->val==targetSum){
-            count++;
-        }
+        currSum += root->val;
 
-        solve(count, node->left, targetSum, sum + node->val);
+        if(currSum==targetSum) count++;
 
-        solve(count, node->right, targetSum, sum + node->val);
-
+        dfs(count, root->left, targetSum, currSum);
+        dfs(count, root->right, targetSum, currSum);
     }
-
     int pathSum(TreeNode* root, int targetSum) {
         if(root==NULL) return 0;
-        
+
         int count = 0;
-        solve(count, root, targetSum, 0);
+
+        dfs(count, root, targetSum, 0);
 
         count+=pathSum(root->left, targetSum);
         count+=pathSum(root->right, targetSum);
-        //to make the next level nodes starting point recursively
 
         return count;
     }
