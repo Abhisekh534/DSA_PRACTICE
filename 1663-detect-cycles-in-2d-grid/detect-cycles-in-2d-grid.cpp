@@ -10,7 +10,7 @@ public:
 
         visited[i][j] = true;
 
-        int result = false;
+        bool result = false;
 
         int kx[4] = {0, 0, 1, -1};
         int ky[4] = {-1, 1, 0, 0};
