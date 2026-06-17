@@ -1,10 +1,10 @@
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<int>inDegree(numCourses, 0);
+        vector<int>inDegree(numCourses);
         vector<vector<int>>adj(numCourses);
 
-        for(vector<int> x : prerequisites){
+        for(vector<int>x : prerequisites){
             inDegree[x[0]]++;
             adj[x[1]].push_back(x[0]);
         }
@@ -24,17 +24,18 @@ public:
             q.pop();
 
             for(int i=0; i<adj[node].size(); i++){
-                int nextNode = adj[node][i];
+                int neighbor = adj[node][i];
 
-                inDegree[nextNode]--;
-                if(inDegree[nextNode]==0){
-                    q.push(nextNode);
-                    topo.push_back(nextNode);
+                inDegree[neighbor]--;
+
+                if(inDegree[neighbor]==0){
+                    q.push(neighbor);
+                    topo.push_back(neighbor);
                 }
             }
         }
 
         if(topo.size()==numCourses) return topo;
-        else return {};
+        return {};
     }
 };
