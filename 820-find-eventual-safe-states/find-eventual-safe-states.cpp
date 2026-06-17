@@ -14,12 +14,12 @@ public:
         }
 
         queue<int>q;
-        vector<int>ans;
+        vector<bool>isSafe(n, false);
 
         for(int i=0; i<n; i++){
             if(outDegree[i]==0){
                 q.push(i);
-                ans.push_back(i);
+                isSafe[i] = true;;
             }
         }
 
@@ -34,12 +34,16 @@ public:
 
                 if(outDegree[previous]==0){
                     q.push(previous);
-                    ans.push_back(previous);
+                    isSafe[previous] = true;
                 }
             }
         }
 
-        sort(ans.begin(), ans.end());
+        vector<int>ans;
+
+        for(int i=0; i<n; i++){
+            if(isSafe[i]) ans.push_back(i);
+        }
 
         return ans;
     }
