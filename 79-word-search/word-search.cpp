@@ -1,38 +1,35 @@
 class Solution {
 public:
-    bool dfs(vector<vector<char>>&board, string&word, int i, int j, int index){
-        if(index==word.size()) return true;
+    bool dfs(int i, int j, vector<vector<char>>&board, string word, int index, vector<vector<bool>>&visited){
+        int n = board.size(), m = board[0].size();
+        if(index == word.size()) return true;
 
-        int n = board.size();
-        int m = board[0].size();
+        if(i<0 || i==n || j<0 || j==m || board[i][j]!=word[index] || visited[i][j]) return false;
 
-        if(i<0 || i==n || j<0 || j==m || board[i][j]=='#' || board[i][j]!=word[index]) return false;
+        visited[i][j] = true;
 
-        char temp = board[i][j];
-        board[i][j] = '#';
+        bool result = (dfs(i, j-1, board, word, index+1, visited) ||
+                        dfs(i, j+1, board, word, index+1, visited) ||
+                        dfs(i-1, j, board, word, index+1, visited) ||
+                        dfs(i+1, j, board, word, index+1, visited)
+                        );
 
-        bool found = dfs(board, word, i, j-1, index+1) || 
-                    dfs(board, word, i, j+1, index+1) ||
-                    dfs(board, word, i-1, j, index+1) ||
-                    dfs(board, word, i+1, j, index+1);
+        visited[i][j] = false;
 
-        //alag se left right top bottom calculate karne se 4 recursive calls chali jaayengi no matter ki first call me hi true mil jaaye aur baaki calls redundant ho jaaye
-
-        board[i][j] = temp;
-        
-        return found;
-
+        return result;
     }
     bool exist(vector<vector<char>>& board, string word) {
         int n = board.size();
         int m = board[0].size();
 
+        vector<vector<bool>>visited(n, vector<bool>(m, false));
+
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                if(dfs(board, word, i, j, 0)) return true;
+                if(dfs(i, j, board, word, 0, visited)) return true;
             }
         }
-
+        
         return false;
     }
 };
