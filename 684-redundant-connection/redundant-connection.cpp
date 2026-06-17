@@ -26,10 +26,8 @@ public:
             //check previous indirect connection(using dfs) before adding this direct connection 
             
             vector<int>vis(n+1, false);
-            
-            if(!adj[source].empty() && !adj[dest].empty()){
-                if(dfs(source, dest, adj, vis)) return {source, dest};
-            }
+
+            if(dfs(source, dest, adj, vis)) return {source, dest};
 
             //because the control did not go to the return statement, therefore no previous connection
             //now make this connection
