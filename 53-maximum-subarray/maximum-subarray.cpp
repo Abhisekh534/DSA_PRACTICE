@@ -5,9 +5,8 @@ public:
         int maxi = INT_MIN;
 
         for(int x : nums){
-            sum+=x;
+            sum = max(x, sum+x);
             maxi = max(maxi, sum);
-            if(sum<0) sum = 0;
         }
 
         return maxi;
