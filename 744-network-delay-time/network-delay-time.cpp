@@ -10,13 +10,14 @@ public:
         vector<int>distance(n+1, INT_MAX);
         distance[k] = 0;
 
-        queue<pair<int, int>>q;
-        q.push({k, 0});
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
 
-        while(!q.empty()){
-            int node = q.front().first;
-            int weight = q.front().second;
-            q.pop();
+        pq.push({k, 0});
+
+        while(!pq.empty()){
+            int node = pq.top().first;
+            int weight = pq.top().second;
+            pq.pop();
 
             for(int i=0; i<adj[node].size(); i++){
                 int neighbor = adj[node][i].first;
@@ -24,7 +25,7 @@ public:
 
                 if(weight + neighborDist < distance[neighbor]){
                     distance[neighbor] = weight + neighborDist;
-                    q.push({neighbor, distance[neighbor]});
+                    pq.push({neighbor, distance[neighbor]});
                 }
             }
         }
