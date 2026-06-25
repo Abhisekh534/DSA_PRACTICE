@@ -11,6 +11,6 @@ public:
             else h = mid;
         }
 
-        return l;
+        return h;
     }
 };
