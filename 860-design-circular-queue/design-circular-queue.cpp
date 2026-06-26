@@ -37,8 +37,7 @@ public:
     
     int Rear() {
         if(size==0) return -1;
-        if(r==0) return arr[capacity-1];
-        return arr[r-1];
+        return arr[(((r-1)%capacity)+capacity)%capacity];
     }
     
     bool isEmpty() {
