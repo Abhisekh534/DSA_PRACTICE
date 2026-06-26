@@ -12,11 +12,11 @@ public:
 
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
 
-        pq.push({k, 0});
+        pq.push({0, k});
 
         while(!pq.empty()){
-            int node = pq.top().first;
-            int weight = pq.top().second;
+            int node = pq.top().second;
+            int weight = pq.top().first;
             pq.pop();
 
             for(int i=0; i<adj[node].size(); i++){
@@ -25,7 +25,7 @@ public:
 
                 if(weight + neighborDist < distance[neighbor]){
                     distance[neighbor] = weight + neighborDist;
-                    pq.push({neighbor, distance[neighbor]});
+                    pq.push({distance[neighbor], neighbor});
                 }
             }
         }
