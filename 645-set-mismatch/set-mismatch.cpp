@@ -13,7 +13,6 @@ public:
         for(int i=0; i<n; i++) sum+=nums[i];
 
         int z = n*(n+1)/2;
-        if(sum>z) return {x, x - (sum-z)};
         return {x, x+z-sum};
     }
 };
