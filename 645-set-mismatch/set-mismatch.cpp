@@ -2,15 +2,15 @@ class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
         int n = nums.size();
-        vector<int>freq(n+1);
-        for(int x : nums) freq[x]++;
-
-        int x, y;
-        for(int i=1; i<=n; i++){
-            if(freq[i]==2) x = i;
-            else if(freq[i]==0) y = i;
+        int x, y, sum = 0;;
+        
+        vector<bool>isPresent(n+1, false);
+        for(int num : nums){
+            if(isPresent[num]) x = num;
+            isPresent[num] = true;
+            sum+=num;
         }
 
-        return {x, y};
+        return {x, x + (n*(n+1)/2) - sum};
     }
 };
