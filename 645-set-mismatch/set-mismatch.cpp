@@ -1,18 +1,16 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size(), sum = 0, x;
-        for(int i=0; i<n-1; i++){
-            if(nums[i]==nums[i+1]){
-                x = nums[i];
-                break;
-            }
-        }
-        
-        for(int i=0; i<n; i++) sum+=nums[i];
+        int n = nums.size();
+        vector<int>freq(n+1);
+        for(int x : nums) freq[x]++;
 
-        int z = n*(n+1)/2;
-        return {x, x+z-sum};
+        int x, y;
+        for(int i=1; i<=n; i++){
+            if(freq[i]==2) x = i;
+            else if(freq[i]==0) y = i;
+        }
+
+        return {x, y};
     }
 };
