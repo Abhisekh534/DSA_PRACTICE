@@ -1,8 +1,6 @@
 class Solution {
 public:
     vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
-        vector<int>freq(n);
-
         vector<int>p(n);
 
         for(vector<int> x : bookings){
