@@ -38,8 +38,7 @@ public:
 
                 if(nx>0 && nx<n && ny>0 && ny<m && !visited[nx][ny]){
                     visited[nx][ny] = true;
-                    if(heightMap[nx][ny]>height) pq.push({heightMap[nx][ny], nx, ny});
-                    else pq.push({height, nx, ny});
+                    pq.push({max(heightMap[nx][ny], height), nx, ny});
                 }
             }
         }
