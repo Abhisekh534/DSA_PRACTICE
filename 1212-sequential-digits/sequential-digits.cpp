@@ -1,24 +1,27 @@
 class Solution {
 public:
-    void solve(vector<int>&ans, int low, int high, int temp){
-        if(temp>high) return;
-
-        if(temp>=low) ans.push_back(temp);
-
-        if(temp%10==9) return;
-
-        temp*=10;
-        temp+=(((temp/10)%10)+1);
-
-        solve(ans, low, high, temp);
-    }
     vector<int> sequentialDigits(int low, int high) {
         vector<int>ans;
-        for(int i=1; i<=9; i++){
-            solve(ans, low, high, i);
-        }
+        
+        queue<int>q;
 
-        sort(ans.begin(), ans.end());
+        for(int i=1; i<=9; i++) q.push(i);
+        
+        while(!q.empty()){
+            int number = q.front();
+            q.pop();
+
+            if(number>high) continue;
+
+            if(number>=low) ans.push_back(number);
+
+            if(number%10==9) continue;
+
+            number*=10;
+            number+=(((number/10)%10)+1);
+
+            q.push(number);
+        }
 
         return ans;
     }
