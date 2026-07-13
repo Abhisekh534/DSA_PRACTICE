@@ -12,7 +12,7 @@
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        //morris traversal
+        //morris traversal ka variation
 
         vector<int>ans;
 
