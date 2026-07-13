@@ -20,24 +20,15 @@ public:
 
         while(curr){
             if(curr->left){
-                TreeNode* temp = curr->left;
+                TreeNode * temp = curr->left;
+                while(temp->right!=NULL) temp = temp->right;
 
-                while(temp->right!=curr && temp->right!=NULL){
-                    temp = temp->right;
-                }
-
-                if(temp->right==curr){
-                    temp->right = NULL;
-                    curr = curr->right;
-                }else{
-                    temp->right = curr;
-                    ans.push_back(curr->val);
-                    curr = curr->left;
-                }
-            }else{
-                ans.push_back(curr->val);
-                curr = curr->right;
+                temp->right = curr->right;
+                curr->right = curr->left;
+                curr->left  = NULL;
             }
+            ans.push_back(curr->val);
+            curr = curr->right;
         }
 
         return ans;
