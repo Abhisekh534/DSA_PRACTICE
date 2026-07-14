@@ -20,11 +20,12 @@ public:
         while(even && even->next){
             odd->next = even->next;
             even->next = even->next->next;
-            odd->next->next = firsteven;
 
             odd = odd->next;
             even = even->next;
         }
+
+        odd->next = firsteven;
 
         return head;
     }
